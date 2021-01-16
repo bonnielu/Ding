@@ -84,9 +84,9 @@ router.get('/audio/:numItems', async (req, res, next) => {
       sound_info.push({
         "id": response.data.id,
         "url": response.data.url, 
-        "name": response.data.width,
-        "description": response.data.height,
-        "created": response.data.download_url,
+        "name": response.data.name,
+        "description": response.data.description,
+        "created": response.data.created,
         "duration": response.data.duration,
         "num_downloads": response.data.num_downloads,
         "avg_rating": response.data.avg_rating
