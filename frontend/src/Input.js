@@ -1,5 +1,7 @@
 import React from 'react';
 import Checkbox from './Checkbox.js'
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container'
 
 const OPTIONS = ["Text", "Images", "Audio"];
 
@@ -16,6 +18,7 @@ class Input extends React.Component {
         num: 1
     }
 
+    // Handles changes in checkbox 
     handleCheckboxChange = changeEvent => {
         const {name} = changeEvent.target;
     
@@ -27,10 +30,12 @@ class Input extends React.Component {
         }));
     };
 
+    // Handles changes in number input 
     handleNumChange = e => {
         this.setState({num: e.target.value});
     };
 
+    // Dynamically creates checkboxes 
     createCheckbox = option => (
         <Checkbox
           label={option}
@@ -40,6 +45,7 @@ class Input extends React.Component {
         />
       );
     
+    //  Handles form submit events 
     handleFormSubmit = formSubmitEvent => {
         formSubmitEvent.preventDefault();
     
@@ -61,7 +67,9 @@ class Input extends React.Component {
             <div className="row mt-5">
                 <div className="col-sm-12">
                 <form onSubmit={this.handleFormSubmit}>
-                    {this.createCheckboxes()}
+                    <div className='checkboxBox'>
+                        {this.createCheckboxes()}
+                    </div>
 
                     <label>
                         Number of Page Elements
@@ -69,9 +77,9 @@ class Input extends React.Component {
                     <input type='number' max='50' step='1' value={this.state.num} onChange={this.handleNumChange}></input>
         
                     <div className="form-group mt-2">
-                    <button type="submit" className="btn">
-                        Ding
-                    </button>
+                    <Button type="submit" className="btn generate" size='lg' block>
+                        DING
+                    </Button>
                     </div>
                 </form>
                 </div>

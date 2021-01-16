@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Input from './Input.js'
 import InputTag from './InputTags.js'
