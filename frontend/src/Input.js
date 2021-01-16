@@ -4,13 +4,16 @@ import Checkbox from './Checkbox.js'
 const OPTIONS = ["Text", "Images", "Audio"];
 
 class Input extends React.Component {
+
     state = {
         checkboxes: OPTIONS.reduce(
             (options, option) => ({
                 ...options,
                 [option]: false
             })
-        )
+        ),
+
+        num: 0
     }
 
     handleCheckboxChange = changeEvent => {
@@ -32,6 +35,7 @@ class Input extends React.Component {
           .forEach(checkbox => {
             console.log(checkbox, "is selected.");
         });
+
     };
 
     createCheckbox = option => (
@@ -52,10 +56,15 @@ class Input extends React.Component {
                 <div className="col-sm-12">
                 <form onSubmit={this.handleFormSubmit}>
                     {this.createCheckboxes()}
+
+                    <label>
+                        Number of Page Elements
+                    </label>
+                    <input type='number' min='1' max='50' step='1' value={this.state.num}></input>
         
                     <div className="form-group mt-2">
-                    <button type="submit" className="btn btn-primary">
-                        Submit
+                    <button type="submit" className="btn">
+                        Ding
                     </button>
                     </div>
                 </form>
@@ -65,6 +74,5 @@ class Input extends React.Component {
         );
     }
 };
-
 
 export default Input;
