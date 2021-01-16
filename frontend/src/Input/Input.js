@@ -5,6 +5,8 @@ import axios from 'axios'
 import Container from 'react-bootstrap/Container';
 
 
+
+
 const OPTIONS = ["Text", "Images", "Audio"];
 
 class Input extends React.Component {
@@ -50,11 +52,23 @@ class Input extends React.Component {
     //  Handles form submit events 
     handleFormSubmit = formSubmitEvent => {
         formSubmitEvent.preventDefault();
+
+        let imageCheck = false; 
+        let audioCheck = false; 
+        let textCheck = false; 
     
         Object.keys(this.state.checkboxes)
           .filter(checkbox => this.state.checkboxes[checkbox])
           .forEach(checkbox => {
-                console.log(checkbox, "is selected."); 
+              if(checkbox === 'Images') {
+                  imageCheck = true;
+              }
+              if (checkbox === "Audio") {
+                  audioCheck = true;
+              }
+              if (checkbox === "Text") {
+                audioCheck = true;
+              }
         });
 
         let numImage = this.state.num; 
@@ -62,11 +76,18 @@ class Input extends React.Component {
         console.log(this.state.num + ' page elements');
 
         // Call backend for image information 
-        axios.get(`/images/{numImage}`, {
-        }).then(function(response) {
-        console.log(response)
-        })
-
+        if (imageCheck) {
+            axios.get(`localhost:5000/images/${numImage}`, {
+            }).then(function(response) {
+            console.log(response)
+            })
+        }
+        if (textCheck) {
+            axios.get(`localhost:5000/words/${numImage}`, {
+            }).then(function(response) {
+            console.log(response)
+            })
+        }
     };
 
     // Dynamically create checkboxes
