@@ -13,7 +13,7 @@ class Input extends React.Component {
             })
         ),
 
-        num: 0
+        num: 1
     }
 
     handleCheckboxChange = changeEvent => {
@@ -26,16 +26,9 @@ class Input extends React.Component {
             }
         }));
     };
-    
-    handleFormSubmit = formSubmitEvent => {
-        formSubmitEvent.preventDefault();
-    
-        Object.keys(this.state.checkboxes)
-          .filter(checkbox => this.state.checkboxes[checkbox])
-          .forEach(checkbox => {
-            console.log(checkbox, "is selected.");
-        });
 
+    handleNumChange = e => {
+        this.setState({num: e.target.value});
     };
 
     createCheckbox = option => (
@@ -46,6 +39,19 @@ class Input extends React.Component {
           key={option}
         />
       );
+    
+    handleFormSubmit = formSubmitEvent => {
+        formSubmitEvent.preventDefault();
+    
+        Object.keys(this.state.checkboxes)
+          .filter(checkbox => this.state.checkboxes[checkbox])
+          .forEach(checkbox => {
+                console.log(checkbox, "is selected."); 
+        });
+
+        console.log(this.state.num + ' page elements');
+
+    };
 
       createCheckboxes = () => OPTIONS.map(this.createCheckbox);
 
@@ -60,7 +66,7 @@ class Input extends React.Component {
                     <label>
                         Number of Page Elements
                     </label>
-                    <input type='number' min='1' max='50' step='1' value={this.state.num}></input>
+                    <input type='number' max='50' step='1' value={this.state.num} onChange={this.handleNumChange}></input>
         
                     <div className="form-group mt-2">
                     <button type="submit" className="btn">
