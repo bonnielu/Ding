@@ -1,6 +1,7 @@
 import React from 'react';
 import Checkbox from './Checkbox.js'
 import Button from 'react-bootstrap/Button';
+import axios from 'axios'
 import Container from 'react-bootstrap/Container';
 
 
@@ -56,11 +57,20 @@ class Input extends React.Component {
                 console.log(checkbox, "is selected."); 
         });
 
+        let numImage = this.state.num; 
+
         console.log(this.state.num + ' page elements');
+
+        // Call backend for image information 
+        axios.get(`/images/{numImage}`, {
+        }).then(function(response) {
+        console.log(response)
+        })
 
     };
 
-      createCheckboxes = () => OPTIONS.map(this.createCheckbox);
+    // Dynamically create checkboxes
+    createCheckboxes = () => OPTIONS.map(this.createCheckbox);
 
     render() {
         return (
