@@ -1,5 +1,8 @@
 /* // basic formatting outline provided */
 
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap');
+
 * {
     font-family: sans-serif;
     font-size: 17px;
@@ -7,11 +10,11 @@
   
   .input-tag {
     background: white;
-    border: 1px solid #d6d6d6;
+    border: 1px solid #D8D5DB;
     border-radius: 2px;
     display: flex;
     flex-wrap: wrap;
-    padding: 5px 5px 0;
+    padding: 10px 10px 0;
   }
   
   .input-tag input {
@@ -29,24 +32,25 @@
   
   .input-tag__tags li {
     align-items: center;
-    background: #85A3BF;
+    background: #B0D7FF;
     border-radius: 2px;
-    color: white;
+    color: #2D3142;
     display: flex;
-    font-weight: 300;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
     list-style: none;
     margin-bottom: 5px;
     margin-right: 5px;
-    padding: 5px 10px;
+    padding: 10px 10px;
   }
   
   .input-tag__tags li button {
     align-items: center;
     appearance: none;
-    background: #333333;
+    background: #2D3142;
     border: none;
     border-radius: 50%;
-    color: white;
+    color: #D8D5DB;
     cursor: pointer;
     display: inline-flex;
     font-size: 12px;

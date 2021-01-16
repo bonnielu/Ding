@@ -42,6 +42,17 @@
   font-style: normal;
   font-weight: 900px;
   font-size: 100px;
-  line-height: 244px;
+  line-height: 100px;
+
+}
+
+.head2 {
+  text-align: center;
+  color: #adacb5;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 900px;
+  font-size: 100px;
+  line-height: 100px;
 
 }
