@@ -1,0 +1,22 @@
+{
+  "name": "ding",
+  "version": "1.0.0",
+  "description": "A brainstorming app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bonnielu/Ding.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bonnielu/Ding/issues"
+  },
+  "homepage": "https://github.com/bonnielu/Ding#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
