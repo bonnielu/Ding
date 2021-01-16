@@ -1,14 +1,11 @@
 import './App.css';
+import Input from './Input.js'
   
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <form onSubmit=''>
-          <input
-              name="isGoing"
-              type="text"/>
-        </form>
+        <Input></Input>
       </header>
     </div>
   );
