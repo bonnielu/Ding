@@ -106,7 +106,7 @@ class Input extends React.Component {
                 }).then(function(response) {
                     var audioLink = [];
                     for (let i = 0; i < numAudio; i++) {
-                        audioLink.push(JSON.parse(response['data'])[0]['url']);
+                        audioLink.push(JSON.parse(response['data'])[i]['url']);
                     }
                 })
             }
@@ -138,6 +138,13 @@ class Input extends React.Component {
                         this.state.downloads.map((image, i) => 
                             <div key={i}>
                                 <img src={image}></img>
+                            </div> 
+                        )
+                    }
+                    {
+                        this. state.words.map((word, i) => 
+                            <div key={i}>
+                                <p>{word}</p>
                             </div> 
                         )
                     }
