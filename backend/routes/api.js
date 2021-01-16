@@ -3,6 +3,7 @@ var router = express.Router();
 const axios = require("axios");
 const fs = require("fs");
 const circle = require("circular-json");
+const { spawn } = require("child_process");
 
 const SOUND_API_KEY = process.env.API_KEY;
 
@@ -33,16 +34,11 @@ router.get("/words/:numItems", (req, res, next) => {
 });
 
 router.get("/related/:word", (req, res, next) => {
-  let child = spawn(
-    "python3",
-    [`${__dirname}/../python_test/test.py`, req.params.word],
-    {
-      serialization: "json",
-    }
-  );
-  child.stdin.end();
+  console.log(__dirname);
+  let child = spawn("python3", [`${__dirname}/test.py`, req.params.word]);
+  console.log(child + "sdfdf");
   child.stdout.on("data", (data) => {
-    res.json(data);
+    res.json(data.toString());
   });
 });
 
