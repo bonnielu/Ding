@@ -97,7 +97,7 @@ class Input extends React.Component {
                 })
             }
             if (audioCheck) {
-                axios.get(`http://localhost:5000/audio/${numText}`, {
+                axios.get(`http://localhost:5000/audio/${numAudio}`, {
                 }).then(function(response) {
                     
                 })
@@ -120,7 +120,7 @@ class Input extends React.Component {
                     <label>
                         Number of Page Elements
                     </label>
-                    <input type='number' max='50' step='1' value={this.state.num} onChange={this.handleNumChange}></input>
+                    <input type='number' min='1' max='50' step='1' value={this.state.num} onChange={this.handleNumChange}></input>
         
                     <div className="form-group mt-2">
                     <Button type="submit" className="btn generate" size='lg' block>

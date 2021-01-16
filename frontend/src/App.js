@@ -9,7 +9,8 @@ function Heading() {
     <div className="Heading-scroll">
       <div>
         {/* // if you want text to move faster you can insert more DINGS */}
-        <h1 className="header1">DING DING DING</h1>
+        <h1 className="head1">DING!    DING!    DING!</h1>
+        <h1 className="head2">DING!    DING!    DING!</h1>
       </div>
     </div>
   );

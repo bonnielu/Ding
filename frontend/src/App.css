@@ -2,6 +2,8 @@
   background-color: #2D3142;
 } */
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,900&display=swap');
+
 .checkboxBox {
     background: #f5f4f6;
     border-radius: 10px;
@@ -32,11 +34,25 @@
   z-index: 1;
 }
 
+
 .head1 {
   text-align: center;
   color: #2D3142;
-  font-size: 200px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 900px;
+  font-size: 100px;
+  line-height: 100px;
 
+}
 
+.head2 {
+  text-align: center;
+  color: #adacb5;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 900px;
+  font-size: 100px;
+  line-height: 100px;
 
 }
