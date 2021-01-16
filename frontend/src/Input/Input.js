@@ -70,11 +70,11 @@ class Input extends React.Component {
           .forEach(checkbox => {
               if(checkbox === 'Images') {
                   imageCheck = true;
-                  numImage = Math.floor((Math.random()*this.state.num)) + 1;
+                  numImage = Math.floor((Math.random() * this.state.num) + 1);
               }
               if (checkbox === "Audio") {
                   audioCheck = true;
-                  numAudio = Math.floor(Math.random() * (this.state.num-numImage));
+                  numAudio = Math.floor((Math.random() * (this.state.num - numImage)) + 1);
                   console.log(numAudio);
               }
               if (checkbox === "Text") {
