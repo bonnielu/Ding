@@ -77,7 +77,7 @@ router.get('/audio/:numItems', async (req, res, next) => {
 
    let sound_info = [];
 
-
+    // random SOUND ID is generated for "randomness"
     for (var i = 0; i < number; i++){
       let soundID = getRandomSoundID(1, 440000);
       let response = await axios.get(`https://freesound.org/apiv2/sounds/${soundID}/?token=${SOUND_API_KEY}`);
@@ -89,7 +89,13 @@ router.get('/audio/:numItems', async (req, res, next) => {
         "created": response.data.created,
         "duration": response.data.duration,
         "num_downloads": response.data.num_downloads,
-        "avg_rating": response.data.avg_rating
+        "avg_rating": response.data.avg_rating, 
+        // the [] are used to access a key that has dashes in the name
+        // previews directly lead to playing the sound
+        "preview-lq-ogg": response['data']['previews']['preview-lq-ogg'],
+        "preview-lq-mp3": response['data']['previews']['preview-lq-mp3'],
+        "preview-hq-ogg": response['data']['previews']['preview-hq-ogg'],
+        "preview-hq-mp3": response['data']['previews']['preview-hq-mp3']
       });
     } 
     //console.log(sound_info);
