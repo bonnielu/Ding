@@ -40,7 +40,8 @@ const InputTag = () => {
           { tags.map((tag, i) => (
             <li key={tag}>
               {tag}
-              <button type="button" onClick={() => { removeTag(i); }}>+</button>
+              {/* // button to remove tags that have been previously inputted */}
+              <button type="button" onClick={() => { removeTag(i); }}>+</button> 
             </li>
           ))}
           <li className="input-tag__tags__input"><input type="text" onKeyDown={inputKeyDown} ref={c => { tagInput = c; }} /></li>
