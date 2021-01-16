@@ -84,13 +84,16 @@ class Input extends React.Component {
             if (imageCheck) {
                 axios.get(`http://localhost:5000/images/${numImage}`, {
                 }).then(function(response) {
-                    let download = JSON.parse(response['data'])[0]['download_url']
+                    for (let i = 0; i < numImage; i++) {
+                        var download = []
+                        download.push(JSON.parse(response['data'])[i]['download_url']);
+                    }
                 })
             }
             if (textCheck) {
                 axios.get(`http://localhost:5000/words/${numText}`, {
                 }).then(function(response) {
-                    let wordArray = response['data'];
+                    var wordArray = response['data'];
                 })
             }
             if (audioCheck) {
