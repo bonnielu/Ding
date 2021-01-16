@@ -36,9 +36,24 @@ router.get('/words/:numItems', (req, res, next) => {
 router.get('/images/:numItems', async (req, res, next) => {
   var number = parseInt(req.params.numItems);
   try {
-    let response = await axios.get(`https://picsum.photos/v2/list?page=1&limit=${number}`);
-    console.log(response);
-    res.json(circle.stringify(response.data[0].download_url));
+    let response = await axios.get(`https://picsum.photos/v2/list?limit=${number}`);
+    //console.log(response);
+
+   let image_info = [];
+
+    for (var i = 0; i < number; i++){
+      image_info.push({
+        "id": response.data[i].id,
+        "author": response.data[i].author, 
+        "width": response.data[i].width,
+        "height": response.data[i].height,
+        "download_url": response.data[i].download_url
+      });
+    } 
+    console.log(image_info);
+
+    res.json(circle.stringify(image_info));
+
   } catch (error) {
     console.log(error)
   }   
