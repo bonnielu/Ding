@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+<<<<<<< HEAD
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
@@ -36,3 +37,7 @@
     ]
   }
 }
+=======
+  "private": true
+}
+>>>>>>> 56420af2e1d65fa3ecbc605e608e7537bdbd19e4
