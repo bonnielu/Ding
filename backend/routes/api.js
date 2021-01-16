@@ -5,7 +5,7 @@ const fs = require('fs');
 const circle = require("circular-json")
 
 // load dictionaries
-let dictionaryStr = fs.readFileSync('./u.txt', 'utf8');
+let dictionaryStr = fs.readFileSync(`${__dirname}/../u.txt`, 'utf8');
 let dictionary = JSON.parse(dictionaryStr);
 let dictLength = dictionary.length
 
@@ -37,17 +37,17 @@ router.get('/images/:numItems', async (req, res, next) => {
     let response = await axios.get(`https://picsum.photos/v2/list?limit=${number}`);
     //console.log(response);
 
-   let image_info = [];
+    let image_info = [];
 
-    for (var i = 0; i < number; i++){
+    for (var i = 0; i < number; i++) {
       image_info.push({
         "id": response.data[i].id,
-        "author": response.data[i].author, 
+        "author": response.data[i].author,
         "width": response.data[i].width,
         "height": response.data[i].height,
         "download_url": response.data[i].download_url
       });
-    } 
+    }
     console.log(image_info);
 
     res.json(circle.stringify(image_info));
