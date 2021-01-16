@@ -3,7 +3,7 @@ var router = express.Router();
 const axios = require("axios");
 const fs = require("fs");
 const circle = require("circular-json");
-const { spawn } = require("child_process");
+const { spawn, exec } = require("child_process");
 
 const SOUND_API_KEY = process.env.API_KEY;
 
@@ -33,10 +33,30 @@ router.get("/words/:numItems", (req, res, next) => {
   res.json(Array.from(randomWords));
 });
 
+// let child = exec(`python3 '${__dirname}/test.py'`, (err, stdout, stderr) => {
+//   if (err) {
+//     console.log(err.stack);
+//     console.log(err.code);
+//   }
+//   console.log(`stdout: ${stdout}`);
+//   console.log(`stderr: ${stderr}`);
+// });
+
 router.get("/related/:word", (req, res, next) => {
   console.log(__dirname);
-  let child = spawn("python3", [`${__dirname}/test.py`, req.params.word]);
+  let child = exec(
+    `python3 '${__dirname}/test.py' ${req.params.word}`,
+    (err, stdout, stderr) => {
+      if (err) {
+        console.log(err.stack);
+        console.log(err.code);
+      }
+      console.log(`stdout: ${stdout}`);
+      console.log(`stderr: ${stderr}`);
+    }
+  );
   console.log(child + "sdfdf");
+  // child.stdin.write(req.params.word);
   child.stdout.on("data", (data) => {
     res.json(data.toString());
   });
