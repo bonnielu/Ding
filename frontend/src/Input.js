@@ -1,7 +1,8 @@
 import React from 'react';
 import Checkbox from './Checkbox.js'
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container'
+import Container from 'react-bootstrap/Container';
+
 
 const OPTIONS = ["Text", "Images", "Audio"];
 
