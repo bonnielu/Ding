@@ -17,3 +17,26 @@
   flex-wrap: nowrap;
   flex-direction: row;
 }
+
+.Heading-scroll {
+  display: flex;
+  position: center;
+  overflow: hidden;
+  width: auto;
+  height: 400px;
+  margin: auto;
+  background-color: #B0D7FF;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.head1 {
+  text-align: center;
+  color: #2D3142;
+  font-size: 200px;
+
+
+
+}

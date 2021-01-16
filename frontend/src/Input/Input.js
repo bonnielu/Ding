@@ -6,7 +6,6 @@ import Container from 'react-bootstrap/Container';
 
 
 
-
 const OPTIONS = ["Text", "Images", "Audio"];
 
 class Input extends React.Component {
@@ -63,12 +62,15 @@ class Input extends React.Component {
           .forEach(checkbox => {
               if(checkbox === 'Images') {
                   imageCheck = true;
+                  imageCheck = Math.floor(Math.random()*this.state.num);
               }
               if (checkbox === "Audio") {
                   audioCheck = true;
+                  audioCheck = Math.floor(Math.random()*(this.state.num-imageCheck));
               }
               if (checkbox === "Text") {
-                audioCheck = true;
+                  textCheck = true;
+                  textCheck = this.state.num - imageCheck - audioCheck;
               }
         });
 
