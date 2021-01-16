@@ -9,8 +9,8 @@
   }
   
   .input-tag {
-    background: white;
-    border: 1px solid #D8D5DB;
+    background: #ffffff;
+    border: 1px solid #d6d6d6;
     border-radius: 2px;
     display: flex;
     flex-wrap: wrap;

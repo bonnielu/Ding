@@ -1,4 +1,5 @@
 var express = require('express');
+var cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 const http = require('http')
@@ -11,6 +12,8 @@ var apiRouter = require('./routes/api');
 var app = express();
 const server = http.createServer(app);
 const port = process.env.PORT || '5000';
+
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

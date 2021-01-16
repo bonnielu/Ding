@@ -1,7 +1,9 @@
 import React from 'react';
 import Checkbox from './Checkbox.js'
 import Button from 'react-bootstrap/Button';
+import axios from 'axios'
 import Container from 'react-bootstrap/Container';
+
 
 
 const OPTIONS = ["Text", "Images", "Audio"];
@@ -49,18 +51,51 @@ class Input extends React.Component {
     //  Handles form submit events 
     handleFormSubmit = formSubmitEvent => {
         formSubmitEvent.preventDefault();
+
+        let imageCheck = false; 
+        let audioCheck = false; 
+        let textCheck = false; 
+        
     
         Object.keys(this.state.checkboxes)
           .filter(checkbox => this.state.checkboxes[checkbox])
           .forEach(checkbox => {
-                console.log(checkbox, "is selected."); 
+              if(checkbox === 'Images') {
+                  imageCheck = true;
+                  imageCheck = Math.floor(Math.random()*this.state.num);
+              }
+              if (checkbox === "Audio") {
+                  audioCheck = true;
+                  audioCheck = Math.floor(Math.random()*(this.state.num-imageCheck));
+              }
+              if (checkbox === "Text") {
+                  textCheck = true;
+                  textCheck = this.state.num - imageCheck - audioCheck;
+              }
         });
 
         console.log(this.state.num + ' page elements');
 
+        // TODO: Distribute the page elements among the categories
+        let numImage = this.state.num;
+
+        // Call backend for image, word, and text information 
+        if (imageCheck) {
+            axios.get(`localhost:5000/images/${numImage}`, {
+            }).then(function(response) {
+            console.log(response)
+            })
+        }
+        if (textCheck) {
+            axios.get(`localhost:5000/words/${numImage}`, {
+            }).then(function(response) {
+            console.log(response)
+            })
+        }
     };
 
-      createCheckboxes = () => OPTIONS.map(this.createCheckbox);
+    // Dynamically create checkboxes
+    createCheckboxes = () => OPTIONS.map(this.createCheckbox);
 
     render() {
         return (
