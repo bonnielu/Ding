@@ -4,10 +4,12 @@ const axios = require('axios');
 const fs = require('fs');
 const circle = require("circular-json")
 
+const params = new URL(process.env.API_KEY);
+
 // load dictionaries
-//let dictionaryStr = fs.readFileSync('./u.txt', 'utf8');
-//let dictionary = JSON.parse(dictionaryStr);
-//let dictLength = dictionary.length
+let dictionaryStr = fs.readFileSync('./u.txt', 'utf8');
+let dictionary = JSON.parse(dictionaryStr);
+let dictLength = dictionary.length
 
 // function to get random words
 function getRandomWords(numInts) {
@@ -16,7 +18,6 @@ function getRandomWords(numInts) {
     index = Math.floor(Math.random() * dictLength);
     l.add(dictionary[index]);
   }
-  console.log(l);
   return l;
 }
 
@@ -28,7 +29,6 @@ router.get('/', function (req, res, next) {
 // get a given number of words from dictionary
 router.get('/words/:numItems', (req, res, next) => {
   randomWords = getRandomWords(req.params.numItems);
-  console.log(randomWords);
   res.json(Array.from(randomWords));
 });
 
@@ -36,14 +36,29 @@ router.get('/words/:numItems', (req, res, next) => {
 router.get('/images/:numItems', async (req, res, next) => {
   var number = parseInt(req.params.numItems);
   try {
-    let response = await axios.get(`https://picsum.photos/v2/list?page=1&limit=${number}`);
-    console.log(response);
-    res.json(circle.stringify(response.data[0].download_url));
+    let response = await axios.get(`https://picsum.photos/v2/list?limit=${number}`);
+    //console.log(response);
+
+   let image_info = [];
+
+    for (var i = 0; i < number; i++){
+      image_info.push({
+        "id": response.data[i].id,
+        "author": response.data[i].author, 
+        "width": response.data[i].width,
+        "height": response.data[i].height,
+        "download_url": response.data[i].download_url
+      });
+    } 
+    console.log(image_info);
+
+    res.json(circle.stringify(image_info));
+
   } catch (error) {
     console.log(error)
-  }   
+  }
   //res.json(`heres some images: ${req.params.numItems} images to be exact`)
-    
+
 });
 
 // get audio
