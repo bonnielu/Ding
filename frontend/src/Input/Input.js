@@ -66,31 +66,39 @@ class Input extends React.Component {
           .forEach(checkbox => {
               if(checkbox === 'Images') {
                   imageCheck = true;
-                  numImage = Math.floor(Math.random()*this.state.num);
+                  numImage = Math.floor((Math.random()*this.state.num)) + 1;
+                  console.log(numImage);
               }
               if (checkbox === "Audio") {
                   audioCheck = true;
-                  numAudio = Math.floor(Math.random()*(this.state.num-imageCheck));
+                  numAudio = Math.floor(Math.random() * (this.state.num-numImage));
+                  console.log(numAudio);
               }
               if (checkbox === "Text") {
                   textCheck = true;
-                  numText = this.state.num - imageCheck - audioCheck;
+                  numText = this.state.num - numImage - numAudio;
               }
-
-              // Call backend for image, word, and text information 
-                if (imageCheck) {
-                    axios.get(`http://localhost:5000/images/${this.state.num}`, {
-                    }).then(function(response) {
-                        let download = JSON.parse(response['data'])[0]['download_url']
-                    })
-                }
-                if (textCheck) {
-                    axios.get(`http://localhost:5000/words/${numText}`, {
-                    }).then(function(response) {
-                        
-                    })
-                }
             });
+
+            // Call backend for image, word, and text information 
+            if (imageCheck) {
+                axios.get(`http://localhost:5000/images/${numImage}`, {
+                }).then(function(response) {
+                    let download = JSON.parse(response['data'])[0]['download_url']
+                })
+            }
+            if (textCheck) {
+                axios.get(`http://localhost:5000/words/${numText}`, {
+                }).then(function(response) {
+                    let wordArray = response['data'];
+                })
+            }
+            if (audioCheck) {
+                axios.get(`http://localhost:5000/audio/${numText}`, {
+                }).then(function(response) {
+                    
+                })
+            }
     };
 
     // Dynamically create checkboxes
