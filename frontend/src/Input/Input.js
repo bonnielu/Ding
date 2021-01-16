@@ -77,7 +77,7 @@ class Input extends React.Component {
         // TODO: Distribute the page elements among the categories
         let numImage = this.state.num;
 
-        // Call backend for image information 
+        // Call backend for image, word, and text information 
         if (imageCheck) {
             axios.get(`localhost:5000/images/${numImage}`, {
             }).then(function(response) {
