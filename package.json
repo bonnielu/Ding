@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/bonnielu/Ding/issues"
   },
-  "homepage": "https://github.com/bonnielu/Ding#readme"
+  "homepage": "https://github.com/bonnielu/Ding#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }
