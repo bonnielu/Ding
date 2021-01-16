@@ -32,7 +32,17 @@ const Input = () => (
         />
         <lable>Text</lable>
         {/* <button className="sendButton" onClick={(event) => sendMessage(event)}>Send</button> */}
-
+        
+        <br />
+        <label>
+          Number of Page Elements:
+          <input
+            name="numberOfGuests"
+            type="number"
+            // value={this.state.numberOfGuests}
+            // onChange={this.handleInputChange}
+             />
+        </label>
     </form>
 );
 
