@@ -3,6 +3,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 const http = require('http')
 
+require('dotenv').config();
+
 // routers
 var apiRouter = require('./routes/api');
 
