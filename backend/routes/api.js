@@ -1,14 +1,34 @@
 var express = require('express');
 var router = express.Router();
+const axios = require('axios');
+const fs = require('fs');
+
+// load dictionaries
+let dictionaryStr = fs.readFileSync('./u.txt', 'utf8');
+let dictionary = JSON.parse(dictionaryStr);
+let dictLength = dictionary.length
+
+// function to get random words
+function getRandomWords(numInts) {
+  let l = new Set();
+  while (l.size < numInts) {
+    index = Math.floor(Math.random() * dictLength);
+    l.add(dictionary[index]);
+  }
+  console.log(l);
+  return l;
+}
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.send("It works!");
 });
 
-// get words
+// get a given number of words from dictionary
 router.get('/words/:numItems', (req, res, next) => {
-  res.json(`heres some words: ${req.params.numItems} words to be exact`);
+  randomWords = getRandomWords(req.params.numItems);
+  console.log(randomWords);
+  res.json(Array.from(randomWords));
 });
 
 // get images
