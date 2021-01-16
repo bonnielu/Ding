@@ -5,9 +5,9 @@ const fs = require('fs');
 const circle = require("circular-json")
 
 // load dictionaries
-//let dictionaryStr = fs.readFileSync('./u.txt', 'utf8');
-//let dictionary = JSON.parse(dictionaryStr);
-//let dictLength = dictionary.length
+let dictionaryStr = fs.readFileSync('./u.txt', 'utf8');
+let dictionary = JSON.parse(dictionaryStr);
+let dictLength = dictionary.length
 
 // function to get random words
 function getRandomWords(numInts) {
@@ -16,7 +16,6 @@ function getRandomWords(numInts) {
     index = Math.floor(Math.random() * dictLength);
     l.add(dictionary[index]);
   }
-  console.log(l);
   return l;
 }
 
@@ -28,7 +27,6 @@ router.get('/', function (req, res, next) {
 // get a given number of words from dictionary
 router.get('/words/:numItems', (req, res, next) => {
   randomWords = getRandomWords(req.params.numItems);
-  console.log(randomWords);
   res.json(Array.from(randomWords));
 });
 
@@ -41,9 +39,9 @@ router.get('/images/:numItems', async (req, res, next) => {
     res.json(circle.stringify(response.data[0].download_url));
   } catch (error) {
     console.log(error)
-  }   
+  }
   //res.json(`heres some images: ${req.params.numItems} images to be exact`)
-    
+
 });
 
 // get audio
