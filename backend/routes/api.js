@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const axios = require('axios');
 const fs = require('fs');
+const circle = require("circular-json")
 
 // load dictionaries
 let dictionaryStr = fs.readFileSync('./u.txt', 'utf8');
@@ -32,22 +33,27 @@ router.get('/words/:numItems', (req, res, next) => {
 });
 
 // get images
-router.get('/images/:numItems', (req, res, next) => {
-  
+router.get('/images/:numItems', async (req, res, next) => {
   var number = parseInt(req.params.numItems);
-
-  // this website can display lists depending on the numItems
-  function pleaseWork() {
-    return axios.get(`https://picsum.photos/v2/list?page=2&limit=${number}`).then(res =>res.data)
+  try {
+    let response = await axios.get(`https://picsum.photos/v2/list`);
+    console.log(response);
+    res.json(circle.stringify(response));
+  } catch (error) {
+    console.log(error)
   }
+  // this website can display lists depending on the numItems
+  // function pleaseWork() {
+  //   return axios.get(`https://picsum.photos/v2/list?page=2&limit=${number}`).then(res =>res.data)
+  // }
 
   // currently returns all data in JSON
-  pleaseWork()
-  .then(data => {
-    res.json({data})
-  })
-  .catch(err => console.log(err))
-  
+  // pleaseWork()
+  // .then(data => {
+  //   res.json({data})
+  // })
+  // .catch(err => console.log(err))
+
   // some random code that may be needed later
   /*
   axios.get(`https://picsum.photos/v2/list?page=2&limit=100`, {
@@ -64,23 +70,23 @@ router.get('/images/:numItems', (req, res, next) => {
     });
     */
   // 
-  
-/*
-  var i;
-  for (i = 1; i <= number; i++){
-    //axios.get(`https://picsum.photos/200?random=${req.params.numItems}$`, {
-    axios.get(`https://picsum.photos/200?random=${number}`, {
-    })
-    .then((res) => {
-      res.json()
-    })
-    .catch((error) => {
-      res.json(`error`)
-    });
 
-  //res.json(`heres some images: ${req.params.numItems} images to be exact`)
-  }
-  */
+  /*
+    var i;
+    for (i = 1; i <= number; i++){
+      //axios.get(`https://picsum.photos/200?random=${req.params.numItems}$`, {
+      axios.get(`https://picsum.photos/200?random=${number}`, {
+      })
+      .then((res) => {
+        res.json()
+      })
+      .catch((error) => {
+        res.json(`error`)
+      });
+  
+    //res.json(`heres some images: ${req.params.numItems} images to be exact`)
+    }
+    */
 });
 
 // get audio
