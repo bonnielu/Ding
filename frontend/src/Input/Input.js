@@ -18,7 +18,11 @@ class Input extends React.Component {
             })
         ),
 
-        num: 1
+        num: 1, 
+
+        downloads: [],
+
+        words: []
     }
 
     // Handles changes in checkbox 
@@ -67,7 +71,6 @@ class Input extends React.Component {
               if(checkbox === 'Images') {
                   imageCheck = true;
                   numImage = Math.floor((Math.random()*this.state.num)) + 1;
-                  console.log(numImage);
               }
               if (checkbox === "Audio") {
                   audioCheck = true;
@@ -84,22 +87,27 @@ class Input extends React.Component {
             if (imageCheck) {
                 axios.get(`http://localhost:5000/images/${numImage}`, {
                 }).then(function(response) {
+                    var download = [];
                     for (let i = 0; i < numImage; i++) {
-                        var download = []
                         download.push(JSON.parse(response['data'])[i]['download_url']);
                     }
-                })
+                    return (this.setState({downloads: download}))
+                }.bind(this))
             }
             if (textCheck) {
                 axios.get(`http://localhost:5000/words/${numText}`, {
                 }).then(function(response) {
                     var wordArray = response['data'];
-                })
+                    return (this.setState({words: wordArray}))
+                }.bind(this))
             }
             if (audioCheck) {
                 axios.get(`http://localhost:5000/audio/${numAudio}`, {
                 }).then(function(response) {
-                    
+                    var audioLink = [];
+                    for (let i = 0; i < numAudio; i++) {
+                        audioLink.push(JSON.parse(response['data'])[0]['url']);
+                    }
                 })
             }
     };
@@ -126,6 +134,13 @@ class Input extends React.Component {
                     <Button type="submit" className="btn generate" size='lg' block>
                         DING
                     </Button>
+                    {
+                        this.state.downloads.map((image, i) => 
+                            <div key={i}>
+                                <img src={image}></img>
+                            </div> 
+                        )
+                    }
                     </div>
                 </form>
                 </div>
