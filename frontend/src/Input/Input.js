@@ -56,6 +56,7 @@ class Input extends React.Component {
         let imageCheck = false; 
         let audioCheck = false; 
         let textCheck = false; 
+        
     
         Object.keys(this.state.checkboxes)
           .filter(checkbox => this.state.checkboxes[checkbox])
@@ -71,9 +72,10 @@ class Input extends React.Component {
               }
         });
 
-        let numImage = this.state.num; 
-
         console.log(this.state.num + ' page elements');
+
+        // TODO: Distribute the page elements among the categories
+        let numImage = this.state.num;
 
         // Call backend for image information 
         if (imageCheck) {
