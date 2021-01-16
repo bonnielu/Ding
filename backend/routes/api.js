@@ -4,6 +4,8 @@ const axios = require('axios');
 const fs = require('fs');
 const circle = require("circular-json")
 
+const params = new URL(process.env.API_KEY);
+
 // load dictionaries
 let dictionaryStr = fs.readFileSync(`${__dirname}/../u.txt`, 'utf8');
 let dictionary = JSON.parse(dictionaryStr);

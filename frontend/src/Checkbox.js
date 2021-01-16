@@ -1,7 +1,8 @@
 import React from 'react'
+import Form from 'react-bootstrap/Form'
 
 const Checkbox = ({ label, isSelected, onCheckboxChange }) => (
-    <div className="form-check">
+    <Form.Check inline>
       <label>
         <input
           type="checkbox"
@@ -12,7 +13,7 @@ const Checkbox = ({ label, isSelected, onCheckboxChange }) => (
         />
         {label}
       </label>
-    </div>
+    </Form.Check>
   );
   
   export default Checkbox;
