@@ -55,6 +55,10 @@ class Input extends React.Component {
         let imageCheck = false; 
         let audioCheck = false; 
         let textCheck = false; 
+
+        let numImage = 0;
+        let numAudio = 0;
+        let numText = 0;
         
     
         Object.keys(this.state.checkboxes)
@@ -62,36 +66,42 @@ class Input extends React.Component {
           .forEach(checkbox => {
               if(checkbox === 'Images') {
                   imageCheck = true;
-                  imageCheck = Math.floor(Math.random()*this.state.num);
+                  numImage = Math.floor((Math.random()*this.state.num)) + 1;
+                  console.log(numImage);
               }
               if (checkbox === "Audio") {
                   audioCheck = true;
-                  audioCheck = Math.floor(Math.random()*(this.state.num-imageCheck));
+                  numAudio = Math.floor(Math.random() * (this.state.num-numImage));
+                  console.log(numAudio);
               }
               if (checkbox === "Text") {
                   textCheck = true;
-                  textCheck = this.state.num - imageCheck - audioCheck;
+                  numText = this.state.num - numImage - numAudio;
               }
-        });
+            });
 
-        console.log(this.state.num + ' page elements');
-
-        // TODO: Distribute the page elements among the categories
-        let numImage = this.state.num;
-
-        // Call backend for image, word, and text information 
-        if (imageCheck) {
-            axios.get(`localhost:5000/images/${numImage}`, {
-            }).then(function(response) {
-            console.log(response)
-            })
-        }
-        if (textCheck) {
-            axios.get(`localhost:5000/words/${numImage}`, {
-            }).then(function(response) {
-            console.log(response)
-            })
-        }
+            // Call backend for image, word, and text information 
+            if (imageCheck) {
+                axios.get(`http://localhost:5000/images/${numImage}`, {
+                }).then(function(response) {
+                    for (let i = 0; i < numImage; i++) {
+                        var download = []
+                        download.push(JSON.parse(response['data'])[i]['download_url']);
+                    }
+                })
+            }
+            if (textCheck) {
+                axios.get(`http://localhost:5000/words/${numText}`, {
+                }).then(function(response) {
+                    var wordArray = response['data'];
+                })
+            }
+            if (audioCheck) {
+                axios.get(`http://localhost:5000/audio/${numAudio}`, {
+                }).then(function(response) {
+                    
+                })
+            }
     };
 
     // Dynamically create checkboxes
