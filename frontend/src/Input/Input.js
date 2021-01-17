@@ -124,11 +124,13 @@ class Input extends React.Component {
     if (audioCheck) {
       axios.get(`http://localhost:5000/audio/${numAudio}`, {}).then(
         function (response) {
-          var audioLink = [];
+          var audioLinkMP3 = [];
+          var audioLinkOGG = [];
           for (let i = 0; i < numAudio; i++) {
-            audioLink.push(JSON.parse(response["data"])[i]["preview-lq-mp3"]);
+            audioLinkMP3.push(JSON.parse(response["data"])[i]["preview-lq-mp3"]);
+            audioLinkOGG.push(JSON.parse(response["data"])[i]["preview-lq-ogg"]);
           }
-          return this.setState({ audios: audioLink });
+          return this.setState({ audios: audioLinkMP3, audioLinkOGG });
         }.bind(this)
       );
     }
@@ -171,10 +173,12 @@ class Input extends React.Component {
                     <p>{word}</p>
                   </div>
                 ))}
-                {this.state.audios.map((audioLink, i) => (
+                {this.state.audios.map((audioLinkMP3, audioLinkOGG, i) => (
                   <div key={i}>
                     <audio controls>
-                      <source src={audioLink} type="audio/mpeg"></source>
+                      <source src={audioLinkMP3} type="audio/mpeg"></source>
+                      <source src={audioLinkOGG} type="audio/ogg"></source>
+                      Your browser does not support the audio element.
                     </audio>
                   </div>
                 ))}
