@@ -65,11 +65,13 @@ class Input extends React.Component {
 
     this.setState({
 
-    downloads: [],
+    downloads: [this.state.selectD],
     words: [],
     audios: [],
-    // selectD: []
+    selectD: []
   });
+
+  console.log(this.state.downloads)
 
     let imageCheck = false;
     let audioCheck = false;
@@ -121,11 +123,14 @@ class Input extends React.Component {
     if (imageCheck) {
       axios.get(`http://localhost:5000/images/${numImage}`, {}).then(
         function (response) {
-          var download = [];
+  
           for (let i = 0; i < numImage; i++) {
-            download.push(JSON.parse(response["data"])[i]["download_url"]);
+            this.setState(prevState => ({
+              downloads: [...prevState.downloads, JSON.parse(response["data"])[i]["download_url"] ]
+            }))
           }
-          return this.setState({ downloads: download });
+
+          // return this.setState({ downloads: download});
         }.bind(this)
       );
     }
