@@ -144,7 +144,7 @@ class Input extends React.Component {
           <div className="col-sm-12">
             <form onSubmit={this.handleFormSubmit}>
               <div className="checkboxBox">{this.createCheckboxes()}</div>
-
+              <br />
               <label>
                 Number of Page Elements{" "}
                 <input
