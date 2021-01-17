@@ -1,0 +1,6 @@
+import gensim
+from gensim.models import KeyedVectors
+from sys import argv
+
+model = KeyedVectors.load("./model.kv")
+print(model.most_similar(argv[1]))
