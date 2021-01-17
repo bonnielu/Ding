@@ -17,7 +17,7 @@ class Input extends React.Component {
     downloads: [],
     words: [],
     audios: [],
-    selectD: []
+    selectD: [],
   };
 
   // Handles changes in checkbox
@@ -39,10 +39,10 @@ class Input extends React.Component {
 
   handleSelectImage = (e) => {
     // e.preventDefault();
-    console.log(e.target.key)
-    console.log(`target value: ${this.state.downloads[e.target.value]}`)
-    this.setState({ selectD: e.target.value})
-  }
+    console.log(e.target.key);
+    console.log(`target value: ${this.state.downloads[e.target.value]}`);
+    this.setState({ selectD: e.target.value });
+  };
 
   // Dynamically creates checkboxes
   createCheckbox = (option) => (
@@ -64,14 +64,13 @@ class Input extends React.Component {
     // console.log(this.state.selectD)
 
     this.setState({
+      downloads: [this.state.selectD],
+      words: [],
+      audios: [],
+      selectD: [],
+    });
 
-    downloads: [this.state.selectD],
-    words: [],
-    audios: [],
-    selectD: []
-  });
-
-  console.log(this.state.downloads)
+    console.log(this.state.downloads);
 
     let imageCheck = false;
     let audioCheck = false;
@@ -116,18 +115,20 @@ class Input extends React.Component {
         numText = this.state.num;
       } else if (audioCheck) {
         numAudio = this.state.num;
-      } 
+      }
     }
 
     // Call backend for image, word, and text information
     if (imageCheck) {
       axios.get(`http://localhost:5000/images/${numImage}`, {}).then(
         function (response) {
-  
           for (let i = 0; i < numImage; i++) {
-            this.setState(prevState => ({
-              downloads: [...prevState.downloads, JSON.parse(response["data"])[i]["download_url"] ]
-            }))
+            this.setState((prevState) => ({
+              downloads: [
+                ...prevState.downloads,
+                JSON.parse(response["data"])[i]["download_url"],
+              ],
+            }));
           }
 
           // return this.setState({ downloads: download});
@@ -185,14 +186,22 @@ class Input extends React.Component {
               </div>
 
               <div className="form-group mt-2">
-                <Button type="submit" className="btn generate" size="lg" block>
-                  DING
-                </Button>
-              <br />
-
-               <div className="parent-formatter">
+                <div className="button-wrapper">
+                  <Button
+                    type="submit"
+                    className="btn generate"
+                    size="lg"
+                    block
+                  >
+                    DING
+                  </Button>
+                </div>
                 {this.state.downloads.map((image, i) => (
-                  <div className="item-formatter" key={i} onMouseUp={this.handleSelectImage}>
+                  <div
+                    className="item-formatter"
+                    key={i}
+                    onMouseUp={this.handleSelectImage}
+                  >
                     <img src={image} alt="DingImage"></img>
                   </div>
                 ))}
@@ -215,7 +224,6 @@ class Input extends React.Component {
                     </audio>
                   </div>
                 ))}
-              </div>
               </div>
             </form>
           </div>

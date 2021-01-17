@@ -11,7 +11,11 @@ We were thinking about what to create for our hackathon project, and many of the
 Users check off which types of media (words, audio, or images) that they want to see, and enter the number of items they want. The information is generated and displayed, hopefully sparking some ideas for the users. 
 
 ## How we built it 
+<<<<<<< HEAD
 - React, CSS/SASS on the frontend
+=======
+- React, CSS on the frontend
+>>>>>>> 7d9832819168a7fa119fa40900344545dd02501a
 - Express, Node on the backend
 - Lorem Picsum, Freesound API to gather data
 
