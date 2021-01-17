@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 const OPTIONS = ["Text", "Images", "Audio"];
 
 class Input extends React.Component {
+
   state = {
     checkboxes: OPTIONS.reduce((options, option) => ({
       ...options,
@@ -19,7 +20,7 @@ class Input extends React.Component {
 
     words: [],
 
-    audios: [],
+    audios: []
   };
 
   // Handles changes in checkbox
@@ -52,6 +53,24 @@ class Input extends React.Component {
   //  Handles form submit events
   handleFormSubmit = (formSubmitEvent) => {
     formSubmitEvent.preventDefault();
+
+    const audio = new Audio("/ding.mp3");
+    audio.play();
+
+    this.setState({
+      checkboxes: OPTIONS.reduce((options, option) => ({
+      ...options,
+      [option]: false,
+    })),
+
+    num: 1,
+
+    downloads: [],
+
+    words: [],
+
+    audios: [] 
+  });
 
     let imageCheck = false;
     let audioCheck = false;
@@ -124,11 +143,13 @@ class Input extends React.Component {
     if (audioCheck) {
       axios.get(`http://localhost:5000/audio/${numAudio}`, {}).then(
         function (response) {
-          var audioLink = [];
+          var audioLinkMP3 = [];
+          var audioLinkOGG = [];
           for (let i = 0; i < numAudio; i++) {
-            audioLink.push(JSON.parse(response["data"])[i]["preview-lq-mp3"]);
+            audioLinkMP3.push(JSON.parse(response["data"])[i]["preview-lq-mp3"]);
+            audioLinkOGG.push(JSON.parse(response["data"])[i]["preview-lq-ogg"]);
           }
-          return this.setState({ audios: audioLink });
+          return this.setState({ audios: audioLinkMP3, audioLinkOGG });
         }.bind(this)
       );
     }
@@ -171,10 +192,12 @@ class Input extends React.Component {
                     <p>{word}</p>
                   </div>
                 ))}
-                {this.state.audios.map((audioLink, i) => (
+                {this.state.audios.map((audioLinkMP3, audioLinkOGG, i) => (
                   <div key={i}>
                     <audio controls>
-                      <source src={audioLink} type="audio/mp3"></source>
+                      <source src={audioLinkMP3} type="audio/mpeg"></source>
+                      <source src={audioLinkOGG} type="audio/ogg"></source>
+                      Your browser does not support the audio element.
                     </audio>
                   </div>
                 ))}
@@ -187,6 +210,8 @@ class Input extends React.Component {
   }
   // Dynamically create checkboxes
   createCheckboxes = () => OPTIONS.map(this.createCheckbox);
+
+
 }
 
 export default Input;
