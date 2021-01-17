@@ -18,11 +18,8 @@ class Input extends React.Component {
     words: [],
     audios: [],
     selectD: [],
-<<<<<<< HEAD
     selectW: [],
-    selectA: []
-=======
->>>>>>> 63332074529be5fded1314b63e0daede7926c2f8
+    selectA: [],
   };
 
   // Handles changes in checkbox
@@ -43,20 +40,19 @@ class Input extends React.Component {
   };
 
   handleSelectAudio = (e) => {
-    console.log('src' + e.target)
-    if ((this.state.selectA).length===0) {
+    console.log("src" + e.target);
+    if (this.state.selectA.length === 0) {
       var source = [];
-      source.push(e.target.src)
-      this.setState({ selectA: source})
-    }
-    else {
-      this.setState(prevState => ({
-        selectA: [...prevState.selectA, e.target.src]
-      }))
+      source.push(e.target.src);
+      this.setState({ selectA: source });
+    } else {
+      this.setState((prevState) => ({
+        selectA: [...prevState.selectA, e.target.src],
+      }));
     }
 
-    console.log(this.state.selectA)
-  }
+    console.log(this.state.selectA);
+  };
 
   handleSelectImage = (e) => {
     if (this.state.selectD.length === 0) {
@@ -71,38 +67,35 @@ class Input extends React.Component {
       }));
     }
 
-      if ((this.state.selectD).length===0) {
-        var source = [];
-        source.push(e.target.src)
-        this.setState({ selectD: source})
-        console.log(this.state.selectD)
-      }
-      else {
-        this.setState(prevState => ({
-          selectD: [...prevState.selectD, e.target.src]
-        }))
-      }
+    // if (this.state.selectD.length === 0) {
+    //   var source = [];
+    //   source.push(e.target.src);
+    //   this.setState({ selectD: source });
+    //   console.log(this.state.selectD);
+    // } else {
+    //   this.setState((prevState) => ({
+    //     selectD: [...prevState.selectD, e.target.src],
+    //   }));
+    // }
 
     // console.log(this.state.selectD)
-  }
+  };
 
   handleSelectText = (e) => {
     // console.log(e.target.innerHTML)
-    if ((this.state.selectW).length===0) {
+    if (this.state.selectW.length === 0) {
       var source = [];
-      source.push(e.target.innerHTML)
-      this.setState({ selectW: source})
-      console.log(this.state.selectW)
-    }
-    else {
-      this.setState(prevState => ({
-        selectW: [...prevState.selectW, e.target.innerHTML]
-      }))
+      source.push(e.target.innerHTML);
+      this.setState({ selectW: source });
+      console.log(this.state.selectW);
+    } else {
+      this.setState((prevState) => ({
+        selectW: [...prevState.selectW, e.target.innerHTML],
+      }));
     }
 
-    console.log(this.state.selectW)
-  }
-
+    console.log(this.state.selectW);
+  };
 
   // Dynamically creates checkboxes
   createCheckbox = (option) => (
@@ -124,17 +117,14 @@ class Input extends React.Component {
     console.log(this.state.selectD);
 
     this.setState({
-      downloads: [this.state.selectD],
-      words: [],
+      downloads: [...this.state.selectD],
+      words: [...this.state.selectW],
       audios: [],
-      selectD: [],
     });
 
-
-  this.setState({downloads: [this.state.selectD ]})
-  this.setState({audio: [this.state.selectA ]})
-  this.setState({audio: [this.state.selectW ]})
-
+    // this.setState({ downloads: [this.state.selectD] });
+    // this.setState({ audio: [this.state.selectA] });
+    // this.setState({ audio: [this.state.selectW] });
 
     let imageCheck = false;
     let audioCheck = false;
@@ -200,7 +190,7 @@ class Input extends React.Component {
         function (response) {
           var wordArray = [...this.state.words];
           console.log(wordArray);
-          console.log([...wordArray])
+          console.log([...wordArray]);
           wordArray.push(response["data"]);
           return this.setState({ words: wordArray });
         }.bind(this)
