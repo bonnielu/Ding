@@ -68,20 +68,50 @@ class Input extends React.Component {
         Object.keys(this.state.checkboxes)
           .filter(checkbox => this.state.checkboxes[checkbox])
           .forEach(checkbox => {
-              if(checkbox === 'Images') {
+              if (checkbox === 'Images') {
                   imageCheck = true;
-                  numImage = Math.floor((Math.random() * this.state.num) + 1);
               }
               if (checkbox === "Audio") {
                   audioCheck = true;
-                  numAudio = Math.floor((Math.random() * (this.state.num - numImage)) + 1);
-                  console.log(numAudio);
               }
               if (checkbox === "Text") {
                   textCheck = true;
-                  numText = this.state.num - numImage - numAudio;
               }
             });
+
+
+            // produces the number of elements to be generated
+            if (imageCheck && textCheck && audioCheck) {
+                numImage = Math.floor((Math.random() * this.state.num) + 1);
+                numAudio = Math.floor((Math.random() * (this.state.num - numImage)) + 1);
+                numText = this.state.num - numImage - numAudio;
+            }
+            else if (imageCheck && textCheck && !audioCheck) {
+                numImage = Math.floor((Math.random() * this.state.num) + 1);
+                numText = this.state.num - numImage;
+            }
+            else if (imageCheck && !textCheck && audioCheck) {
+                numImage = Math.floor((Math.random() * this.state.num) + 1);
+                numAudio = this.state.num - numImage;
+            }
+            else if (!imageCheck && textCheck && audioCheck) {
+                numAudio = Math.floor((Math.random() * this.state.num) + 1);
+                numText = this.state.num - numAudio;
+            }
+            else {
+                if (imageCheck) {
+                    numImage = this.state.num;
+                }
+                else if (textCheck) {
+                    numText = this.state.num;
+                }
+                else if (audioCheck) {
+                    numAudio = this.state.num;
+                }
+                else {
+                    this.state.num = 0;
+                }
+            }
 
             // Call backend for image, word, and text information 
             if (imageCheck) {
