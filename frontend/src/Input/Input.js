@@ -7,7 +7,6 @@ import Container from "react-bootstrap/Container";
 const OPTIONS = ["Text", "Images", "Audio"];
 
 class Input extends React.Component {
-
   state = {
     checkboxes: OPTIONS.reduce((options, option) => ({
       ...options,
@@ -20,7 +19,7 @@ class Input extends React.Component {
 
     words: [],
 
-    audios: []
+    audios: [],
   };
 
   // Handles changes in checkbox
@@ -59,18 +58,18 @@ class Input extends React.Component {
 
     this.setState({
       checkboxes: OPTIONS.reduce((options, option) => ({
-      ...options,
-      [option]: false,
-    })),
+        ...options,
+        [option]: false,
+      })),
 
-    num: 1,
+      num: 1,
 
-    downloads: [],
+      downloads: [],
 
-    words: [],
+      words: [],
 
-    audios: [] 
-  });
+      audios: [],
+    });
 
     let imageCheck = false;
     let audioCheck = false;
@@ -146,8 +145,12 @@ class Input extends React.Component {
           var audioLinkMP3 = [];
           var audioLinkOGG = [];
           for (let i = 0; i < numAudio; i++) {
-            audioLinkMP3.push(JSON.parse(response["data"])[i]["preview-lq-mp3"]);
-            audioLinkOGG.push(JSON.parse(response["data"])[i]["preview-lq-ogg"]);
+            audioLinkMP3.push(
+              JSON.parse(response["data"])[i]["preview-lq-mp3"]
+            );
+            audioLinkOGG.push(
+              JSON.parse(response["data"])[i]["preview-lq-ogg"]
+            );
           }
           return this.setState({ audios: audioLinkMP3, audioLinkOGG });
         }.bind(this)
@@ -166,17 +169,17 @@ class Input extends React.Component {
             <form onSubmit={this.handleFormSubmit}>
               <div className="checkboxBox">{this.createCheckboxes()}</div>
               <br />
-              <label>
-                Number of Page Elements{" "}
+              <div className="num-elements">
                 <input
                   type="number"
                   min="1"
+                  placeholder="# Prompts"
                   max="50"
                   step="1"
                   value={this.state.num}
                   onChange={this.handleNumChange}
                 ></input>
-              </label>
+              </div>
 
               <div className="form-group mt-2">
                 <Button type="submit" className="btn generate" size="lg" block>
@@ -210,8 +213,6 @@ class Input extends React.Component {
   }
   // Dynamically create checkboxes
   createCheckboxes = () => OPTIONS.map(this.createCheckbox);
-
-
 }
 
 export default Input;
