@@ -193,7 +193,7 @@ class Input extends React.Component {
                 {this.state.audios.map((audioLink, i) => (
                   <div key={i}>
                     <audio controls>
-                      <source src={audioLink} type="audio/mp3"></source>
+                      <source src={audioLink} type="audio/mpeg"></source>
                     </audio>
                   </div>
                 ))}
