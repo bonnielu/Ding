@@ -38,13 +38,10 @@ class Input extends React.Component {
   };
 
   handleSelectImage = (e) => {
-
-      // var joined = this.state.selectD.concat(e.target.src);
-      this.setState(prevState => ({
-        selectD: [...prevState.selectD, e.target.src]
-      }))
-
-    console.log(this.state.selectD)
+    // e.preventDefault();
+    console.log(e.target.key)
+    console.log(`target value: ${this.state.downloads[e.target.value]}`)
+    this.setState({ selectD: e.target.value})
   }
 
   // Dynamically creates checkboxes
@@ -191,18 +188,26 @@ class Input extends React.Component {
                 <Button type="submit" className="btn generate" size="lg" block>
                   DING
                 </Button>
+              <br />
+
+               <div className="parent-formatter">
                 {this.state.downloads.map((image, i) => (
-                  <div key={i} onMouseUp={this.handleSelectImage}>
+                  <div className="item-formatter" key={i} onMouseUp={this.handleSelectImage}>
                     <img src={image} alt="DingImage"></img>
                   </div>
                 ))}
+              </div>
+              <div className="parent-formatter">
                 {this.state.words.map((word, i) => (
-                  <div key={i}>
+                  <div className="text-formatter" key={i}>
                     <p>{word}</p>
                   </div>
                 ))}
+              </div>
+
+              <div className="parent-formatter">
                 {this.state.audios.map((audioLinkMP3, audioLinkOGG, i) => (
-                  <div key={i}>
+                  <div className="item-formatter" key={i}>
                     <audio controls preload="auto">
                       <source src={audioLinkMP3} type="audio/mpeg"></source>
                       <source src={audioLinkOGG} type="audio/ogg"></source>
@@ -210,6 +215,7 @@ class Input extends React.Component {
                     </audio>
                   </div>
                 ))}
+              </div>
               </div>
             </form>
           </div>
