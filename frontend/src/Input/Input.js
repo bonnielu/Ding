@@ -16,13 +16,8 @@ class Input extends React.Component {
     num: 1,
     downloads: [],
     words: [],
-<<<<<<< HEAD
     audios: [],
     selectD: []
-=======
-
-    audios: [],
->>>>>>> 72423c3d7dc7e6797cd657ce718c25d736eec1e8
   };
 
   // Handles changes in checkbox
@@ -66,7 +61,6 @@ class Input extends React.Component {
     const audio = new Audio("/ding.mp3");
     audio.play();
 
-<<<<<<< HEAD
     // console.log(this.state.selectD)
 
     this.setState({
@@ -76,22 +70,6 @@ class Input extends React.Component {
     audios: [],
     // selectD: []
   });
-=======
-    this.setState({
-      checkboxes: OPTIONS.reduce((options, option) => ({
-        ...options,
-        [option]: false,
-      })),
-
-      num: 1,
-
-      downloads: [],
-
-      words: [],
-
-      audios: [],
-    });
->>>>>>> 72423c3d7dc7e6797cd657ce718c25d736eec1e8
 
     let imageCheck = false;
     let audioCheck = false;
@@ -205,18 +183,26 @@ class Input extends React.Component {
                 <Button type="submit" className="btn generate" size="lg" block>
                   DING
                 </Button>
+              <br />
+
+               <div className="parent-formatter">
                 {this.state.downloads.map((image, i) => (
-                  <div key={i} onMouseUp={this.handleSelectImage}>
+                  <div className="item-formatter" key={i} onMouseUp={this.handleSelectImage}>
                     <img src={image} alt="DingImage"></img>
                   </div>
                 ))}
+              </div>
+              <div className="parent-formatter">
                 {this.state.words.map((word, i) => (
-                  <div key={i}>
+                  <div className="text-formatter" key={i}>
                     <p>{word}</p>
                   </div>
                 ))}
+              </div>
+
+              <div className="parent-formatter">
                 {this.state.audios.map((audioLinkMP3, audioLinkOGG, i) => (
-                  <div key={i}>
+                  <div className="item-formatter" key={i}>
                     <audio controls preload="auto">
                       <source src={audioLinkMP3} type="audio/mpeg"></source>
                       <source src={audioLinkOGG} type="audio/ogg"></source>
@@ -224,6 +210,7 @@ class Input extends React.Component {
                     </audio>
                   </div>
                 ))}
+              </div>
               </div>
             </form>
           </div>
