@@ -40,7 +40,8 @@ const InputTag = () => {
           { tags.map((tag, i) => (
             <li key={tag}>
               {tag}
-              <button type="button" onClick={() => { removeTag(i); }}>+</button>
+              {/* // button to remove tags that have been previously inputted */}
+              <button type="button" onClick={() => { removeTag(i); }}>+</button> 
             </li>
           ))}
           <li className="input-tag__tags__input"><input type="text" onKeyDown={inputKeyDown} ref={c => { tagInput = c; }} /></li>
@@ -51,26 +52,3 @@ const InputTag = () => {
 
 export default InputTag;
 
-
-
-
-
-// const InputTag = () => (
-//     // Component Wrapper
-//     <div className="input-tag">
-//         {/* // List of tags */}
-//         <ul className="input-tag__tags">
-//             {/* // Each tag */}
-//             <li>
-//                 Tag
-//                 {/* // Remove tag button */}
-//                 <button type="button">Remove</button>
-//             </li>
-
-//             {/* // Actual Input to Add Tafs - Using <li> to have the input always inline</li> */}
-//             <li className="input-tag__tags__input">
-//                 <input type="text" />
-//             </li>
-//         </ul>
-//     </div>
-// );
