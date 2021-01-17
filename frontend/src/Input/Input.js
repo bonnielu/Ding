@@ -16,13 +16,8 @@ class Input extends React.Component {
     num: 1,
     downloads: [],
     words: [],
-<<<<<<< HEAD
     audios: [],
     selectD: []
-=======
-
-    audios: [],
->>>>>>> 72423c3d7dc7e6797cd657ce718c25d736eec1e8
   };
 
   // Handles changes in checkbox
@@ -43,10 +38,10 @@ class Input extends React.Component {
   };
 
   handleSelectImage = (e) => {
-    // e.preventDefault();
-    console.log(e.target.key)
-    console.log(`target value: ${this.state.downloads[e.target.value]}`)
-    this.setState({ selectD: e.target.value})
+    
+    console.log(e.target.src)
+
+    // console.log(this.setState({ selectD: [...this.state.selectD, e.target.value]}))
   }
 
   // Dynamically creates checkboxes
@@ -66,7 +61,6 @@ class Input extends React.Component {
     const audio = new Audio("/ding.mp3");
     audio.play();
 
-<<<<<<< HEAD
     // console.log(this.state.selectD)
 
     this.setState({
@@ -76,22 +70,6 @@ class Input extends React.Component {
     audios: [],
     // selectD: []
   });
-=======
-    this.setState({
-      checkboxes: OPTIONS.reduce((options, option) => ({
-        ...options,
-        [option]: false,
-      })),
-
-      num: 1,
-
-      downloads: [],
-
-      words: [],
-
-      audios: [],
-    });
->>>>>>> 72423c3d7dc7e6797cd657ce718c25d736eec1e8
 
     let imageCheck = false;
     let audioCheck = false;
