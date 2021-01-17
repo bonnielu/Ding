@@ -18,8 +18,11 @@ class Input extends React.Component {
     words: [],
     audios: [],
     selectD: [],
+<<<<<<< HEAD
     selectW: [],
     selectA: []
+=======
+>>>>>>> 63332074529be5fded1314b63e0daede7926c2f8
   };
 
   // Handles changes in checkbox
@@ -56,6 +59,17 @@ class Input extends React.Component {
   }
 
   handleSelectImage = (e) => {
+    if (this.state.selectD.length === 0) {
+      console.log("hi");
+      var source = [];
+      source.push(e.target.src);
+      this.setState({ selectD: source });
+      console.log(this.state.selectD);
+    } else {
+      this.setState((prevState) => ({
+        selectD: [...prevState.selectD, e.target.src],
+      }));
+    }
 
       if ((this.state.selectD).length===0) {
         var source = [];
@@ -107,14 +121,14 @@ class Input extends React.Component {
     const audio = new Audio("/ding.mp3");
     audio.play();
 
-    console.log(this.state.selectD)
+    console.log(this.state.selectD);
 
     this.setState({
-
-    downloads: [],
-    words: [],
-    audios: [],
-  });
+      downloads: [this.state.selectD],
+      words: [],
+      audios: [],
+      selectD: [],
+    });
 
 
   this.setState({downloads: [this.state.selectD ]})
@@ -165,7 +179,7 @@ class Input extends React.Component {
         numText = this.state.num;
       } else if (audioCheck) {
         numAudio = this.state.num;
-      } 
+      }
     }
 
     // Call backend for image, word, and text information
@@ -173,7 +187,7 @@ class Input extends React.Component {
       axios.get(`http://localhost:5000/images/${numImage}`, {}).then(
         function (response) {
           var download = [...this.state.downloads];
-          console.log(download)
+          console.log(download);
           for (let i = 0; i < numImage; i++) {
             download.push(JSON.parse(response["data"])[i]["download_url"]);
           }
@@ -231,11 +245,22 @@ class Input extends React.Component {
               </div>
 
               <div className="form-group mt-2">
-                <Button type="submit" className="btn generate" size="lg" block>
-                  DING
-                </Button>
+                <div className="button-wrapper">
+                  <Button
+                    type="submit"
+                    className="btn generate"
+                    size="lg"
+                    block
+                  >
+                    DING
+                  </Button>
+                </div>
                 {this.state.downloads.map((image, i) => (
-                  <div key={i} onMouseUp={this.handleSelectImage}>
+                  <div
+                    className="item-formatter"
+                    key={i}
+                    onMouseUp={this.handleSelectImage}
+                  >
                     <img src={image} alt="DingImage"></img>
                   </div>
                 ))}
