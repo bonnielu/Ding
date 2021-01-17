@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 const OPTIONS = ["Text", "Images", "Audio"];
 
 class Input extends React.Component {
+
   state = {
     checkboxes: OPTIONS.reduce((options, option) => ({
       ...options,
@@ -52,6 +53,9 @@ class Input extends React.Component {
   //  Handles form submit events
   handleFormSubmit = (formSubmitEvent) => {
     formSubmitEvent.preventDefault();
+
+    const audio = new Audio("/ding.mp3");
+    audio.play();
 
     this.setState({
       checkboxes: OPTIONS.reduce((options, option) => ({
