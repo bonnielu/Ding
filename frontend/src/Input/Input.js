@@ -114,7 +114,6 @@ class Input extends React.Component {
           return this.setState({ audios: audioLink });
         }.bind(this)
       );
-<<<<<<< HEAD
     
     //  Handles form submit events 
     handleFormSubmit = formSubmitEvent => {
@@ -258,8 +257,6 @@ class Input extends React.Component {
             </div>
             </div>
         );
-=======
->>>>>>> 20c87a32fb25dedfddfefde924a5a62fe16640a9
     }
   };
 
