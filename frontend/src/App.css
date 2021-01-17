@@ -26,6 +26,17 @@
   -webkit-appearance: none;
 }
 
+input [type="checkbox"] {
+  position: absolute;
+  top: 10px;
+}
+
+.checkboxBox label {
+  margin-bottom: auto;
+  margin-top: auto;
+  align-items: center;
+}
+
 .num-elements {
   margin-left: auto;
   margin-right: auto;
