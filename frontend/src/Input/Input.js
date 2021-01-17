@@ -17,7 +17,9 @@ class Input extends React.Component {
     downloads: [],
     words: [],
     audios: [],
-    selectD: []
+    selectD: [],
+    selectW: [],
+    selectA: []
   };
 
   // Handles changes in checkbox
@@ -37,10 +39,25 @@ class Input extends React.Component {
     this.setState({ num: e.target.value });
   };
 
+  handleSelectAudio = (e) => {
+    console.log('src' + e.target)
+    if ((this.state.selectA).length===0) {
+      var source = [];
+      source.push(e.target.src)
+      this.setState({ selectA: source})
+    }
+    else {
+      this.setState(prevState => ({
+        selectA: [...prevState.selectA, e.target.src]
+      }))
+    }
+
+    console.log(this.state.selectA)
+  }
+
   handleSelectImage = (e) => {
 
       if ((this.state.selectD).length===0) {
-        console.log('hi')
         var source = [];
         source.push(e.target.src)
         this.setState({ selectD: source})
@@ -52,8 +69,26 @@ class Input extends React.Component {
         }))
       }
 
-    console.log(this.state.selectD)
+    // console.log(this.state.selectD)
   }
+
+  handleSelectText = (e) => {
+    // console.log(e.target.innerHTML)
+    if ((this.state.selectW).length===0) {
+      var source = [];
+      source.push(e.target.innerHTML)
+      this.setState({ selectW: source})
+      console.log(this.state.selectW)
+    }
+    else {
+      this.setState(prevState => ({
+        selectW: [...prevState.selectW, e.target.innerHTML]
+      }))
+    }
+
+    console.log(this.state.selectW)
+  }
+
 
   // Dynamically creates checkboxes
   createCheckbox = (option) => (
@@ -81,11 +116,11 @@ class Input extends React.Component {
     audios: [],
   });
 
-  console.log(this.state.downloads)
 
-  this.setState({downloads: [...this.state.downloads, this.state.selectD ]})
+  this.setState({downloads: [this.state.selectD ]})
+  this.setState({audio: [this.state.selectA ]})
+  this.setState({audio: [this.state.selectW ]})
 
-  console.log(this.state.downloads)
 
     let imageCheck = false;
     let audioCheck = false;
@@ -149,7 +184,10 @@ class Input extends React.Component {
     if (textCheck) {
       axios.get(`http://localhost:5000/words/${numText}`, {}).then(
         function (response) {
-          var wordArray = response["data"];
+          var wordArray = [...this.state.words];
+          console.log(wordArray);
+          console.log([...wordArray])
+          wordArray.push(response["data"]);
           return this.setState({ words: wordArray });
         }.bind(this)
       );
@@ -157,17 +195,13 @@ class Input extends React.Component {
     if (audioCheck) {
       axios.get(`http://localhost:5000/audio/${numAudio}`, {}).then(
         function (response) {
-          var audioLinkMP3 = [];
-          var audioLinkOGG = [];
+          var audioLinkMP3 = [...this.state.audio];
           for (let i = 0; i < numAudio; i++) {
             audioLinkMP3.push(
               JSON.parse(response["data"])[i]["preview-lq-mp3"]
             );
-            audioLinkOGG.push(
-              JSON.parse(response["data"])[i]["preview-lq-ogg"]
-            );
           }
-          return this.setState({ audios: audioLinkMP3, audioLinkOGG });
+          return this.setState({ audios: audioLinkMP3 });
         }.bind(this)
       );
     }
@@ -206,15 +240,14 @@ class Input extends React.Component {
                   </div>
                 ))}
                 {this.state.words.map((word, i) => (
-                  <div key={i}>
+                  <div key={i} onMouseUp={this.handleSelectText}>
                     <p>{word}</p>
                   </div>
                 ))}
-                {this.state.audios.map((audioLinkMP3, audioLinkOGG, i) => (
-                  <div key={i}>
+                {this.state.audios.map((audioLinkMP3, i) => (
+                  <div key={i} onMouseUp={this.handleSelectAudio}>
                     <audio controls preload="auto">
                       <source src={audioLinkMP3} type="audio/mpeg"></source>
-                      <source src={audioLinkOGG} type="audio/ogg"></source>
                       Your browser does not support the audio element.
                     </audio>
                   </div>
