@@ -196,15 +196,18 @@ class Input extends React.Component {
                     DING
                   </Button>
                 </div>
-                {this.state.downloads.map((image, i) => (
-                  <div
-                    className="item-formatter"
-                    key={i}
-                    onMouseUp={this.handleSelectImage}
-                  >
-                    <img src={image} alt="DingImage"></img>
-                  </div>
-                ))}
+
+                <div className="parent-formatter">
+                  {this.state.downloads.map((image, i) => (
+                    <div
+                      className="item-formatter"
+                      key={i}
+                      onMouseUp={this.handleSelectImage}
+                    >
+                      <img src={image} alt="DingImage"></img>
+                    </div>
+                  ))}
+                </div>
               </div>
               <div className="parent-formatter">
                 {this.state.words.map((word, i) => (
