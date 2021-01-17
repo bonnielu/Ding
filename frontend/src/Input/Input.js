@@ -18,11 +18,8 @@ class Input extends React.Component {
     words: [],
     audios: [],
     selectD: [],
-<<<<<<< HEAD
     selectW: [],
     selectA: []
-=======
->>>>>>> 63332074529be5fded1314b63e0daede7926c2f8
   };
 
   // Handles changes in checkbox
@@ -43,7 +40,6 @@ class Input extends React.Component {
   };
 
   handleSelectAudio = (e) => {
-    console.log('src' + e.target)
     if ((this.state.selectA).length===0) {
       var source = [];
       source.push(e.target.src)
