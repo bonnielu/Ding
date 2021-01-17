@@ -66,7 +66,7 @@ router.get("/related/:word", (req, res, next) => {
 router.get("/images/:numItems", async (req, res, next) => {
   var number = parseInt(req.params.numItems);
   try {
-    randomInt = Math.floor(math.random * 1000);
+    randomInt = Math.floor(Math.random * 1000);
     let response = await axios.get(
       `https://picsum.photos/v2/list?limit=${number}&page=${randomInt}`
     );
