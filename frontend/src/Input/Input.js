@@ -182,9 +182,16 @@ class Input extends React.Component {
               </div>
 
               <div className="form-group mt-2">
-                <Button type="submit" className="btn generate" size="lg" block>
-                  DING
-                </Button>
+                <div className="button-wrapper">
+                  <Button
+                    type="submit"
+                    className="btn generate"
+                    size="lg"
+                    block
+                  >
+                    DING
+                  </Button>
+                </div>
                 {this.state.downloads.map((image, i) => (
                   <div key={i}>
                     <img src={image} alt="DingImage"></img>

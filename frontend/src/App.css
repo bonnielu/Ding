@@ -45,8 +45,11 @@ input [type="checkbox"] {
 }
 
 .num-elements > input {
-  line-height: 40px;
-  size: 40px;
+  line-height: 50px;
+  size: 0;
+  font-size: 35px;
+  border-radius: 5px;
+  text-align: center;
 }
 
 .btn-primary {
@@ -54,9 +57,10 @@ input [type="checkbox"] {
   margin-left: auto;
   margin-right: auto;
   box-sizing: content-box;
-  width: 75%;
+  width: 50%;
   background-color: #ffa62b;
   border-color: #ffa62b;
+  box-shadow: 0px 5px #c27715;
 }
 
 .btn-primary:hover {
@@ -65,11 +69,20 @@ input [type="checkbox"] {
   border-color: #ffa62b;
 }
 
-.btn-primary:hactive {
+.btn:active {
   color: #fff;
   translate: 5px;
-  background-color: #ffa62b;
-  border-color: #ffa62b;
+  background-color: #ffa62b !important;
+  border-color: #ffa62b !important;
+  border: none;
+  transform: translateY(5px);
+}
+
+.btn:focus {
+  color: #fff;
+  translate: 5px;
+  background-color: #ffa62b !important;
+  border-color: #ffa62b !important;
 }
 
 .btn-primary:visited {
@@ -94,6 +107,10 @@ button {
   font-size: 20px;
   font-family: "Source Sans Pro", sans-serif;
   color: #2d3142;
+}
+
+.button-wrapper {
+  height: 60px;
 }
 
 /* .selector {
