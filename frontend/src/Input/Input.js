@@ -15,12 +15,10 @@ class Input extends React.Component {
     })),
 
     num: 1,
-
     downloads: [],
-
     words: [],
-
-    audios: []
+    audios: [],
+    selectD: []
   };
 
   // Handles changes in checkbox
@@ -40,6 +38,13 @@ class Input extends React.Component {
     this.setState({ num: e.target.value });
   };
 
+  handleSelectImage = (e) => {
+    // e.preventDefault();
+    console.log(e.target.key)
+    console.log(`target value: ${this.state.downloads[e.target.value]}`)
+    this.setState({ selectD: e.target.value})
+  }
+
   // Dynamically creates checkboxes
   createCheckbox = (option) => (
     <Checkbox
@@ -57,19 +62,14 @@ class Input extends React.Component {
     const audio = new Audio("/ding.mp3");
     audio.play();
 
-    this.setState({
-      checkboxes: OPTIONS.reduce((options, option) => ({
-      ...options,
-      [option]: false,
-    })),
+    // console.log(this.state.selectD)
 
-    num: 1,
+    this.setState({
 
     downloads: [],
-
     words: [],
-
-    audios: [] 
+    audios: [],
+    // selectD: []
   });
 
     let imageCheck = false;
@@ -115,9 +115,7 @@ class Input extends React.Component {
         numText = this.state.num;
       } else if (audioCheck) {
         numAudio = this.state.num;
-      } else {
-        this.state.num = 0;
-      }
+      } 
     }
 
     // Call backend for image, word, and text information
@@ -181,7 +179,7 @@ class Input extends React.Component {
                   DING
                 </Button>
                 {this.state.downloads.map((image, i) => (
-                  <div key={i}>
+                  <div key={i} onMouseUp={this.handleSelectImage}>
                     <img src={image} alt="DingImage"></img>
                   </div>
                 ))}
