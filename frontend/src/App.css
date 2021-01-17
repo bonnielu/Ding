@@ -97,7 +97,7 @@ input [type="checkbox"] {
   border-color: #ffa62b;
 }
 button {
-  margin: 0;
+  margin: auto;
   font-family: "Montserrat";
   font-size: inherit;
 }
@@ -179,6 +179,25 @@ img {
   display: flex;
   max-width: 75%;
   justify-content: center;
+}
+
+.parent-formatter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-between;
+}
+
+.image-formatter {
+  flex-basis: auto;
+  margin: auto;
+}
+
+.text-formatter {
+  flex-basis: auto;
+  padding: 10px;
 }
 
 body {
