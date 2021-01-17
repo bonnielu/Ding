@@ -19,7 +19,7 @@ class Input extends React.Component {
     audios: [],
     selectD: [],
     selectW: [],
-    selectA: []
+    selectA: [],
   };
 
   // Handles changes in checkbox
@@ -39,20 +39,19 @@ class Input extends React.Component {
     this.setState({ num: e.target.value });
   };
 
-  handleSelectAudio = (e) => {
-    if ((this.state.selectA).length===0) {
-      var source = [];
-      source.push(e.target.src)
-      this.setState({ selectA: source})
-    }
-    else {
-      this.setState(prevState => ({
-        selectA: [...prevState.selectA, e.target.src]
-      }))
-    }
+  // handleSelectAudio = (e) => {
+  //   if ((this.state.selectA).length===0) {
+  //     var source = [];
+  //     source.push(e.target.src);
+  //     this.setState({ selectA: source });
+  //   } else {
+  //     this.setState((prevState) => ({
+  //       selectA: [...prevState.selectA, e.target.src],
+  //     }));
+  //   }
 
-    console.log(this.state.selectA)
-  }
+  //   console.log(this.state.selectA);
+  // };
 
   handleSelectImage = (e) => {
     if (this.state.selectD.length === 0) {
@@ -67,38 +66,35 @@ class Input extends React.Component {
       }));
     }
 
-      if ((this.state.selectD).length===0) {
-        var source = [];
-        source.push(e.target.src)
-        this.setState({ selectD: source})
-        console.log(this.state.selectD)
-      }
-      else {
-        this.setState(prevState => ({
-          selectD: [...prevState.selectD, e.target.src]
-        }))
-      }
+    // if (this.state.selectD.length === 0) {
+    //   var source = [];
+    //   source.push(e.target.src);
+    //   this.setState({ selectD: source });
+    //   console.log(this.state.selectD);
+    // } else {
+    //   this.setState((prevState) => ({
+    //     selectD: [...prevState.selectD, e.target.src],
+    //   }));
+    // }
 
     // console.log(this.state.selectD)
-  }
+  };
 
   handleSelectText = (e) => {
     // console.log(e.target.innerHTML)
-    if ((this.state.selectW).length===0) {
+    if (this.state.selectW.length === 0) {
       var source = [];
-      source.push(e.target.innerHTML)
-      this.setState({ selectW: source})
-      console.log(this.state.selectW)
-    }
-    else {
-      this.setState(prevState => ({
-        selectW: [...prevState.selectW, e.target.innerHTML]
-      }))
+      source.push(e.target.innerHTML);
+      this.setState({ selectW: source });
+      console.log(this.state.selectW);
+    } else {
+      this.setState((prevState) => ({
+        selectW: [...prevState.selectW, e.target.innerHTML],
+      }));
     }
 
-    console.log(this.state.selectW)
-  }
-
+    console.log(this.state.selectW);
+  };
 
   // Dynamically creates checkboxes
   createCheckbox = (option) => (
@@ -120,17 +116,14 @@ class Input extends React.Component {
     console.log(this.state.selectD);
 
     this.setState({
-      downloads: [this.state.selectD],
-      words: [],
+      downloads: [...this.state.selectD],
+      words: [...this.state.selectW],
       audios: [],
-      selectD: [],
     });
 
-
-  this.setState({downloads: [this.state.selectD ]})
-  this.setState({audio: [this.state.selectA ]})
-  this.setState({audio: [this.state.selectW ]})
-
+    // this.setState({ downloads: [this.state.selectD] });
+    // this.setState({ audio: [this.state.selectA] });
+    // this.setState({ audio: [this.state.selectW] });
 
     let imageCheck = false;
     let audioCheck = false;
@@ -194,10 +187,7 @@ class Input extends React.Component {
     if (textCheck) {
       axios.get(`http://localhost:5000/words/${numText}`, {}).then(
         function (response) {
-          var wordArray = [...this.state.words];
-          console.log(wordArray);
-          console.log([...wordArray])
-          wordArray.push(response["data"]);
+          var wordArray = response["data"];
           return this.setState({ words: wordArray });
         }.bind(this)
       );
@@ -205,7 +195,7 @@ class Input extends React.Component {
     if (audioCheck) {
       axios.get(`http://localhost:5000/audio/${numAudio}`, {}).then(
         function (response) {
-          var audioLinkMP3 = [...this.state.audio];
+          var audioLinkMP3 = [];
           for (let i = 0; i < numAudio; i++) {
             audioLinkMP3.push(
               JSON.parse(response["data"])[i]["preview-lq-mp3"]
@@ -266,7 +256,7 @@ class Input extends React.Component {
                   </div>
                 ))}
                 {this.state.audios.map((audioLinkMP3, i) => (
-                  <div key={i} onMouseUp={this.handleSelectAudio}>
+                  <div key={i}>
                     <audio controls preload="auto">
                       <source src={audioLinkMP3} type="audio/mpeg"></source>
                       Your browser does not support the audio element.
