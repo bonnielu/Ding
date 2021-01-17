@@ -22,7 +22,9 @@ class Input extends React.Component {
 
         downloads: [],
 
-        words: []
+        words: [],
+
+        audios: []
     }
 
     // Handles changes in checkbox 
@@ -136,9 +138,10 @@ class Input extends React.Component {
                 }).then(function(response) {
                     var audioLink = [];
                     for (let i = 0; i < numAudio; i++) {
-                        audioLink.push(JSON.parse(response['data'])[i]['url']);
+                        audioLink.push(JSON.parse(response['data'])[i]['preview-lq-mp3']);
                     }
-                })
+                    return (this.setState({audios: audioLink}))
+                }.bind(this))
             }
     };
 
@@ -167,14 +170,23 @@ class Input extends React.Component {
                     {
                         this.state.downloads.map((image, i) => 
                             <div key={i}>
-                                <img src={image}></img>
+                                <img src={image} alt="DingImage"></img>
                             </div> 
                         )
                     }
                     {
-                        this. state.words.map((word, i) => 
+                        this.state.words.map((word, i) => 
                             <div key={i}>
                                 <p>{word}</p>
+                            </div> 
+                        )
+                    }
+                    {
+                        this.state.audios.map((audioLink, i) => 
+                            <div key={i}>
+                                <audio controls>
+                                    <source src={audioLink} type="audio/mp3"></source>
+                                </audio>
                             </div> 
                         )
                     }
