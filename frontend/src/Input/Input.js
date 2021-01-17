@@ -38,10 +38,21 @@ class Input extends React.Component {
   };
 
   handleSelectImage = (e) => {
-    // e.preventDefault();
-    console.log(e.target.key)
-    console.log(`target value: ${this.state.downloads[e.target.value]}`)
-    this.setState({ selectD: e.target.value})
+
+      if ((this.state.selectD).length===0) {
+        console.log('hi')
+        var source = [];
+        source.push(e.target.src)
+        this.setState({ selectD: source})
+        console.log(this.state.selectD)
+      }
+      else {
+        this.setState(prevState => ({
+          selectD: [...prevState.selectD, e.target.src]
+        }))
+      }
+
+    console.log(this.state.selectD)
   }
 
   // Dynamically creates checkboxes
@@ -61,15 +72,18 @@ class Input extends React.Component {
     const audio = new Audio("/ding.mp3");
     audio.play();
 
-    // console.log(this.state.selectD)
+    console.log(this.state.selectD)
 
     this.setState({
 
-    downloads: [this.state.selectD],
+    downloads: [],
     words: [],
     audios: [],
-    selectD: []
   });
+
+  console.log(this.state.downloads)
+
+  this.setState({downloads: [...this.state.downloads, this.state.selectD ]})
 
   console.log(this.state.downloads)
 
@@ -123,14 +137,12 @@ class Input extends React.Component {
     if (imageCheck) {
       axios.get(`http://localhost:5000/images/${numImage}`, {}).then(
         function (response) {
-  
+          var download = [...this.state.downloads];
+          console.log(download)
           for (let i = 0; i < numImage; i++) {
-            this.setState(prevState => ({
-              downloads: [...prevState.downloads, JSON.parse(response["data"])[i]["download_url"] ]
-            }))
+            download.push(JSON.parse(response["data"])[i]["download_url"]);
           }
-
-          // return this.setState({ downloads: download});
+          return this.setState({ downloads: download });
         }.bind(this)
       );
     }
@@ -188,26 +200,18 @@ class Input extends React.Component {
                 <Button type="submit" className="btn generate" size="lg" block>
                   DING
                 </Button>
-              <br />
-
-               <div className="parent-formatter">
                 {this.state.downloads.map((image, i) => (
-                  <div className="item-formatter" key={i} onMouseUp={this.handleSelectImage}>
+                  <div key={i} onMouseUp={this.handleSelectImage}>
                     <img src={image} alt="DingImage"></img>
                   </div>
                 ))}
-              </div>
-              <div className="parent-formatter">
                 {this.state.words.map((word, i) => (
-                  <div className="text-formatter" key={i}>
+                  <div key={i}>
                     <p>{word}</p>
                   </div>
                 ))}
-              </div>
-
-              <div className="parent-formatter">
                 {this.state.audios.map((audioLinkMP3, audioLinkOGG, i) => (
-                  <div className="item-formatter" key={i}>
+                  <div key={i}>
                     <audio controls preload="auto">
                       <source src={audioLinkMP3} type="audio/mpeg"></source>
                       <source src={audioLinkOGG} type="audio/ogg"></source>
@@ -215,7 +219,6 @@ class Input extends React.Component {
                     </audio>
                   </div>
                 ))}
-              </div>
               </div>
             </form>
           </div>
