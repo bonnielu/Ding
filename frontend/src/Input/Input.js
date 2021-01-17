@@ -7,7 +7,6 @@ import Container from "react-bootstrap/Container";
 const OPTIONS = ["Text", "Images", "Audio"];
 
 class Input extends React.Component {
-
   state = {
     checkboxes: OPTIONS.reduce((options, option) => ({
       ...options,
@@ -17,8 +16,13 @@ class Input extends React.Component {
     num: 1,
     downloads: [],
     words: [],
+<<<<<<< HEAD
     audios: [],
     selectD: []
+=======
+
+    audios: [],
+>>>>>>> 72423c3d7dc7e6797cd657ce718c25d736eec1e8
   };
 
   // Handles changes in checkbox
@@ -62,6 +66,7 @@ class Input extends React.Component {
     const audio = new Audio("/ding.mp3");
     audio.play();
 
+<<<<<<< HEAD
     // console.log(this.state.selectD)
 
     this.setState({
@@ -71,6 +76,22 @@ class Input extends React.Component {
     audios: [],
     // selectD: []
   });
+=======
+    this.setState({
+      checkboxes: OPTIONS.reduce((options, option) => ({
+        ...options,
+        [option]: false,
+      })),
+
+      num: 1,
+
+      downloads: [],
+
+      words: [],
+
+      audios: [],
+    });
+>>>>>>> 72423c3d7dc7e6797cd657ce718c25d736eec1e8
 
     let imageCheck = false;
     let audioCheck = false;
@@ -141,11 +162,17 @@ class Input extends React.Component {
     if (audioCheck) {
       axios.get(`http://localhost:5000/audio/${numAudio}`, {}).then(
         function (response) {
-          var audioLink = [];
+          var audioLinkMP3 = [];
+          var audioLinkOGG = [];
           for (let i = 0; i < numAudio; i++) {
-            audioLink.push(JSON.parse(response["data"])[i]["preview-lq-mp3"]);
+            audioLinkMP3.push(
+              JSON.parse(response["data"])[i]["preview-lq-mp3"]
+            );
+            audioLinkOGG.push(
+              JSON.parse(response["data"])[i]["preview-lq-ogg"]
+            );
           }
-          return this.setState({ audios: audioLink });
+          return this.setState({ audios: audioLinkMP3, audioLinkOGG });
         }.bind(this)
       );
     }
@@ -161,18 +188,18 @@ class Input extends React.Component {
           <div className="col-sm-12">
             <form onSubmit={this.handleFormSubmit}>
               <div className="checkboxBox">{this.createCheckboxes()}</div>
-
-              <label>
-                Number of Page Elements{" "}
+              <br />
+              <div className="num-elements">
                 <input
                   type="number"
                   min="1"
+                  placeholder="# Prompts"
                   max="50"
                   step="1"
                   value={this.state.num}
                   onChange={this.handleNumChange}
                 ></input>
-              </label>
+              </div>
 
               <div className="form-group mt-2">
                 <Button type="submit" className="btn generate" size="lg" block>
@@ -188,10 +215,12 @@ class Input extends React.Component {
                     <p>{word}</p>
                   </div>
                 ))}
-                {this.state.audios.map((audioLink, i) => (
+                {this.state.audios.map((audioLinkMP3, audioLinkOGG, i) => (
                   <div key={i}>
-                    <audio controls>
-                      <source src={audioLink} type="audio/mpeg"></source>
+                    <audio controls preload="auto">
+                      <source src={audioLinkMP3} type="audio/mpeg"></source>
+                      <source src={audioLinkOGG} type="audio/ogg"></source>
+                      Your browser does not support the audio element.
                     </audio>
                   </div>
                 ))}
@@ -204,8 +233,6 @@ class Input extends React.Component {
   }
   // Dynamically create checkboxes
   createCheckboxes = () => OPTIONS.map(this.createCheckbox);
-
-
 }
 
 export default Input;

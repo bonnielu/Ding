@@ -11,8 +11,11 @@
   border-radius: 10px;
   padding: 5px 5px;
   color: #2d3142;
-  display: inline-block;
-  max-width: 80%;
+  display: flex;
+  max-width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-evenly;
 }
 
 .checkboxBox li {
@@ -23,30 +26,63 @@
   -webkit-appearance: none;
 }
 
+input [type="checkbox"] {
+  position: absolute;
+  top: 10px;
+}
+
+.checkboxBox label {
+  margin-bottom: auto;
+  margin-top: auto;
+  align-items: center;
+}
+
+.num-elements {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+}
+
+.num-elements > input {
+  line-height: 40px;
+  size: 40px;
+}
+
 .btn-primary {
   color: #fff;
-  background-color: #b0d7ff;
-  border-color: #b0d7ff;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: content-box;
+  width: 75%;
+  background-color: #ffa62b;
+  border-color: #ffa62b;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #62a4e6;
-  border-color: #62a4e6;
+  background-color: #ffa62b;
+  border-color: #ffa62b;
 }
 
 .btn-primary:hactive {
   color: #fff;
-  background-color: #62a4e6;
-  border-color: #62a4e6;
+  translate: 5px;
+  background-color: #ffa62b;
+  border-color: #ffa62b;
 }
 
 .btn-primary:visited {
   color: #fff;
-  background-color: #b0d7ff;
-  border-color: #b0d7ff;
+  background-color: #ffa62b;
+  border-color: #ffa62b;
 }
 
+.btn-primary:active {
+  color: #fff;
+  background-color: #ffa62b;
+  border-color: #ffa62b;
+}
 button {
   margin: 0;
   font-family: "Montserrat";
@@ -80,7 +116,7 @@ button {
   position: center;
   overflow: hidden;
   width: auto;
-  height: 400px;
+  height: 150px;
   margin: auto;
   background-color: #b0d7ff;
   justify-content: center;
@@ -99,7 +135,7 @@ button {
   line-height: 200px;
 }
 
-.head2 {
+/* .head2 {
   text-align: center;
   color: #adacb5;
   font-family: "Montserrat", sans-serif;
@@ -107,9 +143,27 @@ button {
   font-weight: 900px;
   font-size: 8vw;
   line-height: 100px;
-}
+} */
 
 img {
   max-height: 300px;
   border-radius: 6px;
+}
+
+.noselect {
+  user-select: none;
+  -moz-user-select: none;
+}
+
+.input-tag {
+  width: 80% !important;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  max-width: 75%;
+  justify-content: center;
+}
+
+body {
+  background-color: #ede7e3;
 }
