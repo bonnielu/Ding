@@ -197,7 +197,7 @@ class Input extends React.Component {
                 ))}
                 {this.state.audios.map((audioLinkMP3, audioLinkOGG, i) => (
                   <div key={i}>
-                    <audio controls>
+                    <audio controls preload="auto">
                       <source src={audioLinkMP3} type="audio/mpeg"></source>
                       <source src={audioLinkOGG} type="audio/ogg"></source>
                       Your browser does not support the audio element.
